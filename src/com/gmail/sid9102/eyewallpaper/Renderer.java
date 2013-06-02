@@ -174,6 +174,9 @@ public class Renderer extends RajawaliRenderer {
 			initScene();
 		}
 		
+		oldYRot = eyeBall.getRotY();
+		oldXRot = eyeBall.getRotX();
+		
 		if(reset && ((System.currentTimeMillis() - timeUp) >= 400))
 		{
 			if(disembodied != mUserPrefs.getBody())
@@ -188,8 +191,6 @@ public class Renderer extends RajawaliRenderer {
 			eyeBall.setRotY(wholeX);
 			eyeBall.setRotX(wholeY);
 			
-			oldYRot = eyeBall.getRotY();
-			oldXRot = eyeBall.getRotX();
 			
 			if (eyeBall.getRotY() != 0) {
 				if (eyeBall.getRotY() < 0) {
