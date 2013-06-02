@@ -29,7 +29,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 
 public class Renderer extends RajawaliRenderer {
 	private BaseObject3D face;
-	private BaseObject3D cornea;
+	private BaseObject3D pupil;
 	private BaseObject3D eyeBall;
 	private Bitmap irisTex;
 	private Bitmap faceTex;
@@ -86,14 +86,14 @@ public class Renderer extends RajawaliRenderer {
 		ObjParser corneaParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.cornea_obj);
 		try {
 			corneaParser.parse();
-			cornea = corneaParser.getParsedObject();
+			pupil = corneaParser.getParsedObject();
 			GouraudMaterial cMat = new GouraudMaterial();
 			irisTex = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.iris);
 			cMat.addTexture(mTextureManager.addTexture(irisTex, TextureType.DIFFUSE));
 			cMat.setSpecularIntensity(0.01f, 0.01f, 0.01f, 0.01f);
 			
-			cornea.setMaterial(cMat);
-			cornea.addLight(cLight);			
+			pupil.setMaterial(cMat);
+			pupil.addLight(cLight);			
 		} catch (ParsingException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public class Renderer extends RajawaliRenderer {
 			eyeBall = eyeParser.getParsedObject();
 			eyeBall.addLight(light);
 			addChild(eyeBall);
-			eyeBall.addChild(cornea);
+			eyeBall.addChild(pupil);
 			if(!disembodied)
 			{
 				addChild(face);
