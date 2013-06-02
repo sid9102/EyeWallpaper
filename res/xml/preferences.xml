@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_cat_main_title" >
+        <CheckBoxPreference
+            android:key="pref_disembodied"
+            android:summary="Display the eye without a face"
+            android:title="Disembodied"
+            android:defaultValue="false" />
+    </PreferenceCategory>
+
+</PreferenceScreen>
