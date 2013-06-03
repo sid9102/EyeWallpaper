@@ -1,10 +1,10 @@
-# Blender MTL File: 'eyeball_rev.blend'
+# Blender MTL File: 'eyeball_rev1.blend'
 # Material Count: 1
 
 newmtl Material.007
 Ns 498.039216
 Ka 0.000000 0.000000 0.000000
-Kd 0.800000 0.800000 0.800000
+Kd 1.000000 1.000000 1.000000
 Ks 1.000000 1.000000 1.000000
 Ni 1.000000
 d 0.100000

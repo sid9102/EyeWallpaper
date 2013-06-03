@@ -69,42 +69,47 @@ public class Renderer extends RajawaliRenderer {
 		
 		disembodied = mUserPrefs.getBody();
 		
-		ObjParser faceParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.face_obj);
-		try {
-			faceParser.parse();
-			face = faceParser.getParsedObject();
-			SimpleMaterial fMat = new SimpleMaterial();
-			face.setMaterial(fMat);
-			faceTex = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.faceprototype);
-			face.addTexture(mTextureManager.addTexture(faceTex));
-			face.setTransparent(true);
-			face.addLight(light);
-		} catch (ParsingException e) {
-			e.printStackTrace();
+		if(!disembodied){
+			ObjParser faceParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.face_obj);
+			try {
+				faceParser.parse();
+				face = faceParser.getParsedObject();
+				SimpleMaterial fMat = new SimpleMaterial();
+				face.setMaterial(fMat);
+				faceTex = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.faceprototype);
+				face.addTexture(mTextureManager.addTexture(faceTex));
+				face.setTransparent(true);
+				face.addLight(light);
+			} catch (ParsingException e) {
+				e.printStackTrace();
+			}
 		}
 		
-		ObjParser corneaParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.cornea_obj);
-		try {
-			corneaParser.parse();
-			pupil = corneaParser.getParsedObject();
-			GouraudMaterial cMat = new GouraudMaterial();
-			irisTex = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.iris);
-			cMat.addTexture(mTextureManager.addTexture(irisTex, TextureType.DIFFUSE));
-			cMat.setSpecularIntensity(0.01f, 0.01f, 0.01f, 0.01f);
-			
-			pupil.setMaterial(cMat);
-			pupil.addLight(cLight);			
-		} catch (ParsingException e) {
-			e.printStackTrace();
-		}
+		irisTex = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.earth);
+
+//		ObjParser corneaParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.cornea_obj);
+//		try {
+//			corneaParser.parse();
+//			pupil = corneaParser.getParsedObject();
+//			DiffuseMaterial cMat = new DiffuseMaterial();
+//			cMat.addTexture(mTextureManager.addTexture(irisTex, TextureType.DIFFUSE));
+//			
+//			pupil.setMaterial(cMat);
+//			pupil.addLight(light);			
+//		} catch (ParsingException e) {
+//			e.printStackTrace();
+//		}
 		
 		ObjParser eyeParser = new ObjParser(mContext.getResources(), mTextureManager, R.raw.eyeball_obj);
 		try {
 			eyeParser.parse();
-			eyeBall = eyeParser.getParsedObject();
+//			eyeBall = eyeParser.getParsedObject();
+			eyeBall = new Sphere(1.0f, 24, 24);
+			DiffuseMaterial eMat = new DiffuseMaterial();
+			eMat.addTexture(mTextureManager.addTexture(irisTex, TextureType.DIFFUSE));
+			eyeBall.setMaterial(eMat);
 			eyeBall.addLight(light);
 			addChild(eyeBall);
-			eyeBall.addChild(pupil);
 			if(!disembodied)
 			{
 				addChild(face);
@@ -174,6 +179,9 @@ public class Renderer extends RajawaliRenderer {
 			initScene();
 		}
 		
+		oldYRot = eyeBall.getRotY();
+		oldXRot = eyeBall.getRotX();		
+		
 		if(reset && ((System.currentTimeMillis() - timeUp) >= 400))
 		{
 			if(disembodied != mUserPrefs.getBody())
@@ -188,8 +196,6 @@ public class Renderer extends RajawaliRenderer {
 			eyeBall.setRotY(wholeX);
 			eyeBall.setRotX(wholeY);
 			
-			oldYRot = eyeBall.getRotY();
-			oldXRot = eyeBall.getRotX();
 			
 			if (eyeBall.getRotY() != 0) {
 				if (eyeBall.getRotY() < 0) {

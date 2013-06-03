@@ -11,14 +11,13 @@ public final class R {
     public static final class attr {
     }
     public static final class drawable {
-        public static final int cornea=0x7f020000;
-        public static final int cornea_alpha=0x7f020001;
-        public static final int cornea_spec=0x7f020002;
-        public static final int faceprototype=0x7f020003;
-        public static final int icon=0x7f020004;
-        public static final int iris=0x7f020005;
-        public static final int iris_spec=0x7f020006;
-        public static final int thumbnail=0x7f020007;
+        public static final int earth=0x7f020000;
+        public static final int eyeball=0x7f020001;
+        public static final int faceprototype=0x7f020002;
+        public static final int icon=0x7f020003;
+        public static final int iris=0x7f020004;
+        public static final int pupil=0x7f020005;
+        public static final int thumbnail=0x7f020006;
     }
     public static final class raw {
         public static final int bumpmap_material_fragment=0x7f040000;
